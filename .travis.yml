@@ -1,0 +1,17 @@
+language: python
+python:
+- 3.5
+addons:
+  apt:
+    packages:
+    - nodejs
+    - npm
+    - libfontconfig
+before_install:
+- mkdir -p .local/bin
+- ln -s /usr/bin/nodejs ./local/bin/node
+- npm install phantomjs
+- export PATH=$PATH:node_modules/.bin
+install:
+- pip install -r requirements.txt
+script: nosetests

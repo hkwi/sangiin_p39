@@ -50,7 +50,7 @@ def run():
 	time.sleep(2)
 	txt = io.StringIO(requests.get(dr.current_url).text)
 	doc = lxml.html.parse(txt)
-	for tr in doc.xpath('.//table[contains(@class,"議員一覧")]//tr')
+	for tr in doc.xpath('.//table[contains(@class,"議員一覧")]//tr'):
 		txt = [t.strip() for t in tr.xpath('.//td[0]//text()') if t.strip()]
 		if txt:
 			name = re.sub("[　 ]+", "", txt.pop(0))

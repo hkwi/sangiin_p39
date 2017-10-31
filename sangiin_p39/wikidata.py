@@ -1,11 +1,11 @@
 import io
 import re
 import time
-import datetime
 import requests
 import selenium.webdriver
 import lxml.html
 import rdflib
+import csv
 
 ns={}
 for k,v in csv.reader(open(os.path.join(os.path.dirname(__file__), "ns.csv"))):

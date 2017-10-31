@@ -9,7 +9,7 @@ addons:
     - libfontconfig
 before_install:
 - mkdir -p .local/bin
-- ln -s /usr/bin/nodejs ./local/bin/node
+- ln -s /usr/bin/nodejs .local/bin/node
 - npm install phantomjs
 - export PATH=$PATH:node_modules/.bin
 install:

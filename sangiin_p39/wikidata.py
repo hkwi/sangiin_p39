@@ -22,9 +22,7 @@ def run():
 	  ?p p:P39 ?st .
 	  ?st ps:P39 wd:Q14552828 .
 	  FILTER NOT EXISTS {
-	    ?p p:P31 ?dup .
-	    ?dup ps:P31 wd:Q17362920 .
-	    ?dup pq:P642 wd:Q474554 .
+	    ?p wdt:P31 wd:Q17362920 .
 	  }
 	  FILTER NOT EXISTS { ?p wdt:P570 ?dead . }
 	  

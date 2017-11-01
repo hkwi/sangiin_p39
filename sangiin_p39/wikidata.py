@@ -18,12 +18,10 @@ def run():
 	w.store.endpoint = "https://query.wikidata.org/bigdata/namespace/wdq/sparql"
 	res = w.query('''
 	SELECT distinct ?p ?pLabel ?altName WHERE {
-	  ?p skos:altLable ?altName .
 	  ?p p:P39 ?st .
 	  ?st ps:P39 wd:Q14552828 .
-	  FILTER NOT EXISTS {
-	    ?p wdt:P31 wd:Q17362920 .
-	  }
+	  ?p skos:altLable ?altName .
+	  FILTER NOT EXISTS { ?p wdt:P31 wd:Q17362920 . }
 	  FILTER NOT EXISTS { ?p wdt:P570 ?dead . }
 	  
 	  { FILTER NOT EXISTS { ?st pq:P582 ?end . } }
@@ -49,11 +47,14 @@ def run():
 	time.sleep(2)
 	txt = io.StringIO(requests.get(dr.current_url).text)
 	doc = lxml.html.parse(txt)
+	
+	found = set()
 	for tr in doc.xpath('.//table[contains(@class,"議員一覧")]//tr'):
 		txt = [t.strip() for t in tr.xpath('.//td[0]//text()') if t.strip()]
 		if txt:
 			name = re.sub("[　 ]+", "", txt.pop(0))
-			assert name in qname.keys()
+			found.add(qname[name])
+	assert found == set(name2q.values())
 
 if __name__=="__main__":
 	run()

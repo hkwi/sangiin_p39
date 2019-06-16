@@ -32,7 +32,7 @@ def run():
 			tms = max([r["timestamp"] for r in rows])
 			m = re.match("(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})", tms)
 			tm = datetime.datetime(*tuple(map(int, m.groups())))
-			if tm + datetime.timedelta(days=30) > datetime.datetime.now():
+			if tm + datetime.timedelta(days=10) > datetime.datetime.now():
 				continue
 		
 		dr.get("https://web.archive.org/save/%s" % url)
